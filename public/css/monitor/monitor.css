@@ -1,0 +1,239 @@
+ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.monitor-box {
+    z-index: 899;
+    width: 100%;
+    height: 866px;
+    position: absolute;
+}
+
+/*地图*/
+#map {
+    height: 866px;
+}
+
+/*右侧*/
+.monitor-box .monitor-box-right {
+    float: right;
+    position: relative;
+    bottom: 830px;
+    width: 470px;
+    right: 0;
+}
+
+.monitor-box .deviceDynamic {
+    width: 470px;
+    background: #088be057;
+    border: 2px #13bce6 solid;
+    border-radius: 10px;
+    right: 30px;
+    position: relative;
+    height: 250px;
+}
+
+.monitor-box .deviceDynamic .title {
+    height: 40px;
+}
+
+.monitor-box .deviceDynamic .title .device-title {
+    width: 250px;
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    float: left;
+    line-height: 40px;
+    left: 10px
+}
+
+.monitor-box .deviceDynamic .title .sel-device {
+    width: 200px;
+    float: right;
+    position: relative;
+    line-height: 40px;
+    right: 10px;
+    top: 5px;
+}
+
+.monitor-box .deviceDynamic .device-info {
+    width: 470px;
+    height: 200px;
+}
+
+.monitor-box .deviceDynamic .device-right {
+    float: right;
+    color: #000000;
+    font-size: 18px;
+    width: 170px;
+    top: 50px;
+    position: relative;
+}
+
+.monitor-box .deviceDynamic .device-left {
+    float: left;
+    width: 300px;
+}
+
+#deviceEcharts {
+    width: 300px;
+    height: 200px;
+    left: 10px;
+    top: 14px;
+}
+
+/*资产管理*/
+.monitor-box .property {
+    width: 470px;
+    background: #088be057;
+    border: 2px #13bce6 solid;
+    border-radius: 10px;
+    position: relative;
+    top: 30px;
+    right: 30px;
+}
+
+.monitor-box .property .title {
+    height: 40px;
+}
+
+.monitor-box .property .title .property-title {
+    width: 250px;
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    float: left;
+    line-height: 40px;
+    left: 10px
+}
+
+.monitor-box .property .property-info {
+    width: 470px;
+    height: 380px;
+}
+
+#propertyEcharts {
+    width: 500px;
+    height: 330px;
+    left: 55px;
+    top: 25px;
+}
+
+/*左侧*/
+.monitor-box .monitor-box-left {
+    float: left;
+    position: relative;
+    bottom: 830px;
+    width: 470px;
+    right: 0;
+}
+
+/*出入所*/
+.monitor-box .warehouse {
+    background: #088be057;
+    border: 2px #13bce6 solid;
+    border-radius: 10px;
+    position: relative;
+    top: 0;
+    right: 0;
+    height: 230px;
+}
+
+.monitor-box .warehouse .title {
+    height: 40px;
+}
+
+.monitor-box .warehouse .title .warehouse-title {
+    width: 250px;
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    float: left;
+    line-height: 40px;
+    left: 10px;
+}
+
+.monitor-box .warehouse .info {
+    width: 470px;
+    height: 200px;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    left: -30px;
+    top: -10px;
+}
+
+.monitor-box .fix {
+    background: #088be057;
+    border: 2px #13bce6 solid;
+    border-radius: 10px;
+    position: relative;
+    top: 20px;
+    right: 0;
+    height: 160px;
+}
+
+.monitor-box .fix .title {
+    height: 40px;
+}
+
+.monitor-box .fix .title .fix-title {
+    width: 250px;
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    float: left;
+    line-height: 40px;
+    left: 10px;
+}
+
+.monitor-box .fix .info {
+    width: 470px;
+    height: 200px;
+    margin-left: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    left: -30px;
+    top: -10px;
+}
+
+.monitor-box .cycleFix {
+    background: #088be057;
+    border: 2px #13bce6 solid;
+    border-radius: 10px;
+    position: relative;
+    top: 40px;
+    right: 0;
+    height: 235px;
+}
+
+.monitor-box .cycleFix .title {
+    height: 40px;
+}
+
+.monitor-box .cycleFix .title .cycleFix-title {
+    width: 250px;
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    float: left;
+    line-height: 40px;
+    left: 10px;
+}
+
+.monitor-box .cycleFix .info {
+    width: 470px;
+    height: 200px;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    left: -30px;
+    top: -10px;
+}

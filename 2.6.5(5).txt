@@ -1,0 +1,6 @@
+1. QrCodeFacade、QrCodeService、QrCodeServiceProvider
+2. QueryBuilderFacade、QueryBuilderService、QueryBuilderServiceProvider
+3. Serializers/
+4. api.php
+5. BIController
+6. Model/EntireInstance

@@ -1,0 +1,401 @@
+@extends('Layout.index')
+@section('style')
+    <link rel="stylesheet" href="/css/monitor/monitor.css">
+@endsection
+@section('content')
+    <section class="content">
+        <div class="monitor-box">
+            <div id="map">
+
+            </div>
+            <div class="monitor-box-right">
+                {{--设备动态统计--}}
+                <div class="deviceDynamic">
+                    <div class="title">
+                        <div class="device-title">设备状态统计（{{env('ORGANIZATION_NAME')}}）</div>
+                        <div class="sel-device">
+                            <select id="selDeviceDynamicByCategoryUniqueCode" class="form-control select2" style="width:100%;" onchange="fnCurrentPage()">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="device-info">
+                        <div class="device-left">
+                            <div id="deviceEcharts"></div>
+                        </div>
+                        <div class="device-right">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {{--资产管理统计--}}
+                <div class="property">
+                    <div class="title">
+                        <div class="property-title">资产管理（{{env('ORGANIZATION_NAME')}}）</div>
+                        <div class="sel-property">
+                            <select id="selPropertyByCategoryUniqueCode" class="form-control select2"
+                                    style="width:100%;" onchange="fnCurrentPageProperty()">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="property-info">
+                        <div id="propertyEcharts"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="monitor-box-left">
+                {{--出入所动态--}}
+                <div class="warehouse">
+                    <div class="title">
+                        <div class="title">
+                            <div class="warehouse-title">出入所统计（{{env('ORGANIZATION_NAME')}}）</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+@endsection
+@section('script')
+    {{--baidu api js--}}
+    {{--    <script type="text/javascript"--}}
+    {{--            src="http://api.map.baidu.com/api?v=3.0&ak=4lEoc9AGdSPWSWbggh6KDny9W0IFpPBU"></script>--}}
+    {{--    <script type="text/javascript" src="/js/baidu/InfoBox_min.js"></script>--}}
+    {{--    <script type="text/javascript" src="/js/baidu/Heatmap_min.js"></script>--}}
+    <script type="text/javascript" src="/baiduOffline/js/mp_load.js"></script>
+    <script type="text/javascript" src="/baiduOffline/js/bmap_offline_api_v3.0_min.js"></script>
+    <script type="text/javascript" src="/baiduOffline/js/InfoBox_min.js"></script>
+    <script type="text/javascript" src="/baiduOffline/js/Heatmap_min.js"></script>
+
+    <script>
+        let stationPolyline = null;
+        let infoBoxTemp = null;
+        let categories = null;
+        let deviceDynamics = null;
+        let properties = null;
+
+        /**
+         * 获取初始化数据
+         */
+        fnInit = () => {
+            $.ajax({
+                url: `{{url('ajaxInitForMonitor')}}`,
+                type: 'get',
+                async: false,
+                success: function (response) {
+                    stationPolyline = response.data.stationPolyline;
+                    categories = response.data.categories;
+                },
+                error: function (error) {
+                    console.log('fail', error)
+                }
+            });
+        };
+
+        /**
+         * 获取设备状态数据
+         */
+        fnDeviceDynamicData = (categoryUniqueCode) => {
+            $.ajax({
+                url: `{{url('ajaxDeviceDynamicForMonitor')}}`,
+                type: 'get',
+                async: false,
+                data: {categoryUniqueCode: categoryUniqueCode},
+                success: function (response) {
+                    deviceDynamics = response.data;
+                },
+                error: function (error) {
+                    console.log('fail', error)
+                }
+            });
+        }
+        /**
+         * 获取资产管理数据
+         */
+        fnPropertyData = (categoryUniqueCode) => {
+            $.ajax({
+                url: `{{url('ajaxPropertyForMonitor')}}`,
+                type: 'get',
+                async: false,
+                data: {categoryUniqueCode: categoryUniqueCode},
+                success: function (response) {
+                    properties = response.data.properties;
+                },
+                error: function (error) {
+                    console.log('fail', error)
+                }
+            });
+        }
+        /**
+         * 百度地图
+         */
+        fnMap = (stationPolyline) => {
+            //配置
+            var map = new BMap.Map("map", {enableMapClick: false});
+            var point = new BMap.Point(110.168034, 20.033661);
+            map.centerAndZoom(point, 9);
+            map.enableScrollWheelZoom(true);   //启用滚轮放大缩小，默认禁用
+            map.enableContinuousZoom(true);    //启用地图惯性拖拽，默认禁用
+            // var mapStyle = {
+            //     features: ["land"],//隐藏地图上的poi
+            //     style: "midnight"  //设置地图风格为高端黑
+            // };
+            // map.setMapStyle(mapStyle);
+
+            var lineOpts = {
+                boxClass: "lineOpt",
+                closeIconMargin: "1px 1px 0 0",
+                align: INFOBOX_AT_TOP,
+                closeIconUrl: '/images/close.png'
+            };
+
+            //连接铁路线
+            var strokeColors = ['#f00', '#00f','#00ff54'];
+            for (var s = 0; s < stationPolyline.length; s++) {
+                var points = [];
+                for (var p = 0, len = stationPolyline[s].length; p < len; p++) {
+                    if (stationPolyline[s][p][2] != null) {
+                        addOverlay(map, stationPolyline[s][p][0], stationPolyline[s][p][1], "/images/dian-black.png", 12, 12, lineContents(stationPolyline[s][p][2], stationPolyline[s][p][3]), lineOpts);
+                    }
+                    points.push(new BMap.Point(stationPolyline[s][p][0], stationPolyline[s][p][1]));
+                }
+                var polyline = new BMap.Polyline(points, {
+                    strokeColor: strokeColors[s],
+                    strokeWeight: 3,
+                    strokeOpacity: 1
+                });   //创建折线
+                map.addOverlay(polyline);   //增加折线
+            }
+
+            //鼠标点击关闭弹框
+            map.addEventListener("mousedown", function (e) {
+                if (infoBoxTemp) {
+                    infoBoxTemp.close();
+                }
+            });
+
+        };
+        /**
+         * 铁路沿线弹框
+         * @param stationName
+         * @returns {string}
+         */
+        lineContents = (stationName, maintainInfo) => {
+            var str = `<div class='title'>` + stationName + `站</div>`;
+            if (maintainInfo.length != 0) {
+                str += `<div class="maintain">
+                            <div class="title">
+                                <div class="maintain-name">` + maintainInfo.workshopName + `</div>
+                                <div class="info"><a href='/report/sceneWorkshopWithAllCategory2/${maintainInfo.workshopCode}' target="_blank">查看详情</a></div>
+                            </div>
+                            <div class="maintain-content">
+                                <table>
+                                    <tr><td>上道</td><td>${maintainInfo.maintain.installed}</td></tr>
+                                    <tr><td>备品</td><td>${maintainInfo.maintain.installing}</td></tr>
+                                    <tr><td>检修</td><td>${maintainInfo.maintain.fixing}</td></tr>
+                                    <tr><td>成品</td><td>${maintainInfo.maintain.fixed}</td></tr>
+                                    <tr><td>送修</td><td>${maintainInfo.maintain.return_factory}</td></tr>
+                                </table>
+                            </div>
+                        </div>`;
+            }
+            return str;
+        };
+
+        /**
+         * 加载点
+         * @param map
+         * @param lng
+         * @param lat
+         * @param icon
+         * @param icon_length
+         * @param icon_width
+         * @param content
+         * @param opts
+         */
+        addOverlay = (map, lng, lat, icon, icon_length, icon_width, content, opts) => {
+            var point = new BMap.Point(lng, lat);
+            var marker = null;
+            if (icon != null) {
+                var mapIcon = new BMap.Icon(icon, new BMap.Size(icon_length, icon_width));
+                marker = new BMap.Marker(point, {icon: mapIcon});
+            } else {
+                marker = new BMap.Marker(point);
+            }
+            map.addOverlay(marker);
+
+            addClickHandler(content, marker, opts, map);
+        };
+
+        /**
+         * 加载弹框
+         * @param content
+         * @param marker
+         * @param opts
+         * @param map
+         */
+        addClickHandler = (content, marker, opts, map) => {
+            marker.addEventListener("click", function (e) {
+                    var infoWindow = new BMapLib.InfoBox(map, content, opts);
+                    if (infoBoxTemp) {
+                        infoBoxTemp.close();
+                    }
+                    infoBoxTemp = infoWindow;
+                    infoBoxTemp.open(marker);
+                }
+            );
+        };
+
+        /**
+         * 加载设备动态统计
+         */
+        fnDeviceDynamic = (deviceDynamics) => {
+            var echartsDeviceDynamicStatus = echarts.init(document.getElementById('deviceEcharts'));
+            var deviceDynamicData = {
+                legend: ['在用', '备用', '送检', '维修'],
+                serieName: '设备动态统计',
+                serieData: deviceDynamics.status
+            };
+            echartsDeviceDynamicStatus.setOption(echartAnnular(deviceDynamicData));
+            echartsDeviceDynamicStatus.on('click', function (params) {
+                statuses = {
+                    "备用": "FIXED",
+                    "在用": "INSTALLED",
+                    "送检": "RETURN_FACTORY",
+                    "维修": "FIXING"
+                };
+                location.href = `{{url('/entire/instance')}}?categoryUniqueCode=${$("#selDeviceDynamicByCategoryUniqueCode").val()}&entireModelUniqueCode=&updatedAt=0&status=${statuses[params.name]}`;
+            });
+            //渲染页面
+            $('.deviceDynamic .device-info .device-right ul li').remove()
+            var str = ` <li>总数：${deviceDynamics.total}</li>
+                        <li>在用：${deviceDynamics.status[0].value}</li>
+                        <li>备用：${deviceDynamics.status[3].value}</li>
+                        <li>送检：${deviceDynamics.status[2].value}</li>
+                        <li>维修：${deviceDynamics.status[1].value}</li>`;
+            $('.deviceDynamic .device-info .device-right ul').append(str);
+        }
+
+        /**
+         * 加载资产管理
+         */
+        fnProperty = (properties) => {
+            var echartsProperty = echarts.init(document.getElementById('propertyEcharts'));
+            var withFactory = properties.withFactory;
+            var categoryName = properties.categoryName;
+
+            var i = 0;
+            var serverData = [];
+            $.each(withFactory, (factoryName, value) => {
+                serverData.push({
+                    name: factoryName,
+                    value: value[categoryName] ? value[categoryName] : 0,
+                });
+                i++;
+            });
+            var propertyData = {
+                legend: properties.factoryNames,
+                serieName: '资产管理',
+                serieData: serverData
+            };
+            echartsProperty.setOption(echartAnnular(propertyData));
+            echartsProperty.on('click', function (params) {
+                location.href = `{{url('report/propertyCategory')}}/${properties.categoryUniqueCode}`;
+            });
+        }
+
+        /**
+         * 饼状图
+         * @param optionData
+         */
+        echartAnnular = (optionData) => {
+            var option = {
+                color: ['#37A2DA', '#9FE6B8', '#FFDB5C', '#FF9F7F', '#FB7293', '#8378EA'],
+                tooltip: {
+                    trigger: 'item',
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    textStyle: {
+                        color: '#000000',
+                    },
+                    data: optionData.legend
+                },
+                series: [{
+                    name: optionData.serieName,
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '20',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: true
+                        }
+                    },
+                    data: optionData.serieData
+                }]
+            };
+
+            return option;
+        }
+
+        /**
+         * 初始化渲染页面
+         * @param categories
+         */
+        fnInitMakeHtml = (categories) => {
+            var selStr = "";
+            $.each(categories, (categoryCode, categoryName) => {
+                selStr += `<option value="${categoryCode}" >${categoryName}</option>`;
+            });
+            $("#selDeviceDynamicByCategoryUniqueCode").append(selStr);
+            $("#selPropertyByCategoryUniqueCode").append(selStr);
+        }
+
+        /**
+         * 设备状态统计选择
+         */
+        fnCurrentPage = () => {
+            fnDeviceDynamicData($('#selDeviceDynamicByCategoryUniqueCode').val());
+            fnDeviceDynamic(deviceDynamics);
+        };
+
+        /**
+         * 资产管理选择
+         */
+        fnCurrentPageProperty = () => {
+            fnPropertyData($('#selPropertyByCategoryUniqueCode').val());
+            fnProperty(properties);
+        }
+
+        $(function () {
+            fnInit();
+            fnDeviceDynamicData();
+            fnPropertyData();
+            fnInitMakeHtml(categories);
+            fnMap(stationPolyline);
+            fnDeviceDynamic(deviceDynamics);
+            fnProperty(properties);
+
+            if ($('.select2').length > 0) $('.select2').select2();
+        });
+
+    </script>
+@endsection
