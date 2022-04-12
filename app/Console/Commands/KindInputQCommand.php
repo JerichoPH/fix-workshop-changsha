@@ -73,6 +73,7 @@ class KindInputQCommand extends Command
     private function zzj(): void
     {
         DB::table("categories")->where("unique_code", "S03")->update(["name" => "转辙机（旧码）"]);
+        DB::table("categories")->insert(["created_at" => now(), "updated_at" => now(), "name" => "转辙机", "unique_code" => "Q42", "race_unique_code" => 2,]);
         $models = [
             "ZD6" => [
                 "ZD6-A",

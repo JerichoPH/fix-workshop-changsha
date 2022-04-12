@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
@@ -419,6 +420,14 @@ class EntireInstance extends Model
     }
 
     /**
+     * 部件种类
+     */
+    final public function PartCategory(): HasOne
+    {
+        return $this->hasOne(PartCategory::class, "id", "part_category_id");
+    }
+
+    /**
      * 型号
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -429,11 +438,11 @@ class EntireInstance extends Model
 
     /**
      * 部件列表
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    final public function PartInstances()
+    final public function PartInstances(): HasMany
     {
-        return $this->hasMany(PartInstance::class, 'entire_instance_identity_code', 'identity_code');
+        return $this->hasMany(EntireInstance::class, 'entire_instance_identity_code', 'identity_code');
     }
 
     final public function PartInstance()
@@ -452,7 +461,7 @@ class EntireInstance extends Model
 
     /**
      * 检修单历史
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     final public function FixWorkflows()
     {
@@ -461,7 +470,7 @@ class EntireInstance extends Model
 
     /**
      * 检测标准值
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     final public function Measurements()
     {
@@ -498,7 +507,7 @@ class EntireInstance extends Model
 
     /**
      * 日志
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     final public function EntireInstanceLogs()
     {
@@ -525,7 +534,7 @@ class EntireInstance extends Model
 
     /**
      * 最后一张送修单
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     final public function WithSendRepairInstances()
     {

@@ -618,46 +618,46 @@ class EntireInstanceService
                         $current_sheet = $excel->getActiveSheet();
 
                         // 首行数据
-                        // 整机数据 A~Z
+                        // 整机数据 A~Y
                         $current_sheet->setCellValueExplicit('A1', '整机');
                         $current_sheet->getStyle('A1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
                         $current_sheet->mergeCells('A1:Y1');
                         $current_sheet->getStyle('A1:Y1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-                        // 电机 AA~AG
+                        // 电机 Z~AF
                         $current_sheet->setCellValueExplicit('Z1', '电机');
                         $current_sheet->getStyle('Z1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
-                        $current_sheet->mergeCells('Z1:AE1');
-                        $current_sheet->getStyle('Z1:AE1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                        $current_sheet->mergeCells('Z1:AF1');
+                        $current_sheet->getStyle('Z1:AF1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                         // 移位接触器(左) AG~AL
-                        $current_sheet->setCellValueExplicit('AF1', '移位接触器(左)');
-                        $current_sheet->getStyle('AF1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
-                        $current_sheet->mergeCells('AF1:AK1');
-                        $current_sheet->getStyle('AF1:AK1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-                        // 移位接触器(右) AM~AR
+                        $current_sheet->setCellValueExplicit('AG1', '移位接触器(左)');
+                        $current_sheet->getStyle('AG1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
+                        $current_sheet->mergeCells('AG1:AK1');
+                        $current_sheet->getStyle('AG1:AK1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                        // 移位接触器(右) AL~AR
                         $current_sheet->setCellValueExplicit('AL1', '移位接触器(右)');
                         $current_sheet->getStyle('AL1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
-                        $current_sheet->mergeCells('AL1:AQ1');
-                        $current_sheet->getStyle('AM1:AR1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-                        // 减速器 AR~AW
-                        $current_sheet->setCellValueExplicit('AR1', '减速器');
-                        $current_sheet->getStyle('AR1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
-                        $current_sheet->mergeCells('AR1:AW1');
-                        $current_sheet->getStyle('AR1:AW1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                        $current_sheet->mergeCells('AL1:AR1');
+                        $current_sheet->getStyle('AL1:AR1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                        // 减速器 AS~AX
+                        $current_sheet->setCellValueExplicit('AS1', '减速器');
+                        $current_sheet->getStyle('AS1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
+                        $current_sheet->mergeCells('AS1:AX1');
+                        $current_sheet->getStyle('AS1:AX1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                         // 油泵 AY~BD
-                        $current_sheet->setCellValueExplicit('AX1', '油泵');
-                        $current_sheet->getStyle('AX1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
-                        $current_sheet->mergeCells('AX1:BC1');
-                        $current_sheet->getStyle('AX1:BC1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                        $current_sheet->setCellValueExplicit('AY1', '油泵');
+                        $current_sheet->getStyle('AY1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
+                        $current_sheet->mergeCells('AY1:BD1');
+                        $current_sheet->getStyle('AY1:BD1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                         // 自动开闭器 BE~BJ
-                        $current_sheet->setCellValueExplicit('BD1', '自动开闭器');
-                        $current_sheet->getStyle('BD1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
-                        $current_sheet->mergeCells('BD1:BI1');
-                        $current_sheet->getStyle('BD1:BI1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                        $current_sheet->setCellValueExplicit('BE1', '自动开闭器');
+                        $current_sheet->getStyle('BE1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
+                        $current_sheet->mergeCells('BE1:BJ1');
+                        $current_sheet->getStyle('BE1:BJ1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                         // 摩擦连接器 BK~BP
-                        $current_sheet->setCellValueExplicit('BJ1', '摩擦连接器');
-                        $current_sheet->getStyle('BJ1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
-                        $current_sheet->mergeCells('BJ1:BO1');
-                        $current_sheet->getStyle('BJ1:BO1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                        $current_sheet->setCellValueExplicit('BK1', '摩擦连接器');
+                        $current_sheet->getStyle('BJK')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
+                        $current_sheet->mergeCells('BK1:BP1');
+                        $current_sheet->getStyle('BK1:BP1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
                         // 首行数据2
                         $first_row_data = [
@@ -1398,7 +1398,7 @@ class EntireInstanceService
                             $mcljq_made_at,  // 摩擦连接器 生产日期BO
                             $mcljq_life_year  // 摩擦连接器 寿命BP
                             ) = $row_datum;
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $pattern = '/Undefined offset: /';
                         $offset = preg_replace($pattern, '', $e->getMessage());
                         $column_name = ExcelWriteHelper::int2Excel($offset);
@@ -1419,9 +1419,9 @@ class EntireInstanceService
                     // 验证型号
                     if (!$om_sub_model_name) throw new ExcelInException("第{$current_row}行，型号不能为空");
                     $sm = EntireModel::with([])->where('is_sub_model', true)->where('parent_unique_code', $em->unique_code)->where('name', $om_sub_model_name)->first();
-                    $pm = PartModel::with([])->where('entire_model_unique_code', $em->unique_code)->where('name', $om_sub_model_name)->first();
-                    if (!$sm && !$pm) throw new ExcelInException("第{$current_row}行，型号：{$category->name} > {$em->name} > {$om_sub_model_name}不存在");
-                    if (!$sm && $pm) $sm = $pm;
+                    // $pm = PartModel::with([])->where('entire_model_unique_code', $em->unique_code)->where('name', $om_sub_model_name)->first();
+                    // if (!$sm && !$pm) throw new ExcelInException("第{$current_row}行，型号：{$category->name} > {$em->name} > {$om_sub_model_name}不存在");
+                    // if (!$sm && $pm) $sm = $pm;
                     // 验证厂家
                     $om_factory_name = $om_factory_name ? trim($om_factory_name) : '';
                     if ($om_factory_name)
@@ -1647,7 +1647,7 @@ class EntireInstanceService
                      * @return array|null
                      * @throws ExcelInException
                      */
-                    $check_dj = function () use ($current_row, &$dj_serial_number, &$dj_factory_name, &$dj_factory_device_code, &$dj_model_name, &$dj_made_at, &$dj_life_year, &$excel_error, $pm, $request, $work_area_unique_code) {
+                    $check_dj = function () use ($current_row, &$dj_serial_number, &$dj_factory_name, &$dj_factory_device_code, &$dj_model_name, &$dj_made_at, &$dj_life_year, &$excel_error, $request, $work_area_unique_code, $status) {
                         // 验证厂家
                         if ($dj_factory_name) {
                             $dj_factory = Factory::with([])->where('name', $dj_factory_name)->first();
@@ -1667,7 +1667,19 @@ class EntireInstanceService
                         // 验证型号
                         $dj_model = null;
                         if ($dj_serial_number && $dj_model_name) {
-                            $dj_model = EntireModel::with([])->where('is_sub_model', true)->where('name', $dj_model_name)->first();
+                            $dj_model = DB::table("entire_models as sm")
+                                ->selectRaw(join(",", ["sm.name", "sm.unique_code", "sm.parent_unique_code", "em.category_unique_code",]))
+                                ->join(DB::raw("entire_models em"), "sm.parent_unique_code", "=", "em.unique_code")
+                                ->join(DB::raw("categories c"), "em.category_unique_code", "=", "c.unique_code")
+                                ->whereNull("c.deleted_at")
+                                ->whereNull("em.deleted_at")
+                                ->whereNull("sm.deleted_at")
+                                ->where("em.is_sub_model", false)
+                                ->where("sm.is_sub_model", true)
+                                ->where("c.name", "道岔专用")
+                                ->where("em.name", "电机")
+                                ->where("sm.name", $dj_model_name)
+                                ->first();
                             if (!$dj_model) throw new ExcelInException("第{$current_row}行，没有找到电机型号：{$dj_model_name}");
                         }
                         // 验证所编号
@@ -1702,20 +1714,18 @@ class EntireInstanceService
                         }
 
                         return ($dj_serial_number && $dj_model) ? [
-                            'part_model_unique_code' => $pm->unique_code,
-                            'part_model_name' => $pm->name,
                             'entire_instance_identity_code' => '',
-                            'status' => 'BUY_IN',
+                            'status' => $status,
                             'factory_name' => $dj_factory_name,
                             'factory_device_code' => $dj_factory_device_code,
                             'identity_code' => '',
-                            'entire_instance_serial_number' => '',
-                            'category_unique_code' => $pm->category_unique_code,
-                            'entire_model_unique_code' => $pm->entire_model_unique_code,
-                            'part_category_id' => $pm->part_category_id,
+                            'category_unique_code' => $dj_model->category_unique_code,
+                            'category_name' => "道岔专用",
+                            'entire_model_unique_code' => $dj_model->unique_code,
+                            'model_unique_code' => $dj_model->unique_code,
+                            'model_name' => $dj_model->name,
                             'made_at' => $dj_made_at,
-                            'scraping_at' => $dj_scraping_at,
-                            'device_model_unique_code' => $dj_model->unique_code,
+                            'scarping_at' => $dj_scraping_at,
                             'serial_number' => $dj_serial_number,
                             'work_area_unique_code' => $work_area_unique_code,
                         ] : null;
@@ -1731,7 +1741,7 @@ class EntireInstanceService
                      * @return array|null
                      * @throws ExcelInException
                      */
-                    $check_ywjcq_l = function () use ($current_row, &$ywjcq_serial_number_l, &$ywjcq_factory_name_l, &$ywjcq_factory_device_code_l, &$ywjcq_model_name_l, &$ywjcq_made_at_l, &$ywjcq_life_year_l, &$excel_error, $pm, $request, $work_area_unique_code) {
+                    $check_ywjcq_l = function () use ($current_row, &$ywjcq_serial_number_l, &$ywjcq_factory_name_l, &$ywjcq_factory_device_code_l, &$ywjcq_model_name_l, &$ywjcq_made_at_l, &$ywjcq_life_year_l, &$excel_error, $request, $work_area_unique_code, $status) {
                         // 验证厂家
                         if ($ywjcq_factory_name_l) {
                             $ywjcq_factory = Factory::with([])->where('name', $ywjcq_factory_name_l)->first();
@@ -1751,7 +1761,19 @@ class EntireInstanceService
                         // 验证型号
                         $ywjcq_model = null;
                         if ($ywjcq_serial_number_l && $ywjcq_model_name_l) {
-                            $ywjcq_model = EntireModel::with([])->where('is_sub_model', true)->where('name', $ywjcq_model_name_l)->first();
+                            $ywjcq_model = DB::table("entire_models as sm")
+                                ->selectRaw(join(",", ["sm.name", "sm.unique_code", "sm.parent_unique_code", "em.category_unique_code",]))
+                                ->join(DB::raw("entire_models em"), "sm.parent_unique_code", "=", "em.unique_code")
+                                ->join(DB::raw("categories c"), "em.category_unique_code", "=", "c.unique_code")
+                                ->whereNull("c.deleted_at")
+                                ->whereNull("em.deleted_at")
+                                ->whereNull("sm.deleted_at")
+                                ->where("em.is_sub_model", false)
+                                ->where("sm.is_sub_model", true)
+                                ->where("c.name", "道岔专用")
+                                ->where("em.name", "移位接触器")
+                                ->where("sm.name", $ywjcq_model_name_l)
+                                ->first();
                             if (!$ywjcq_model) throw new ExcelInException("第{$current_row}行，没有找到移位接触器(左)型号：{$ywjcq_model_name_l}");
                         }
                         // 验证所编号
@@ -1786,20 +1808,18 @@ class EntireInstanceService
                         }
 
                         return ($ywjcq_serial_number_l && $ywjcq_model) ? [
-                            'part_model_unique_code' => $pm->unique_code,
-                            'part_model_name' => $pm->name,
                             'entire_instance_identity_code' => '',
-                            'status' => 'BUY_IN',
+                            'status' => $status,
                             'factory_name' => $ywjcq_factory_name_l,
                             'factory_device_code' => $ywjcq_factory_device_code_l,
                             'identity_code' => '',
-                            'entire_instance_serial_number' => '',
-                            'category_unique_code' => $pm->category_unique_code,
-                            'entire_model_unique_code' => $pm->entire_model_unique_code,
-                            'part_category_id' => $pm->part_category_id,
+                            'category_unique_code' => $ywjcq_model->category_unique_code,
+                            "category_name" => "道岔专用",
+                            'entire_model_unique_code' => $ywjcq_model->unique_code,
+                            'model_unique_code' => $ywjcq_model->unique_code,
+                            'model_name' => $ywjcq_model->name,
                             'made_at' => $ywjcq_made_at_l,
-                            'scraping_at' => $ywjcq_scraping_at,
-                            'device_model_unique_code' => $ywjcq_model->unique_code,
+                            'scarping_at' => $ywjcq_scraping_at,
                             'serial_number' => $ywjcq_serial_number_l,
                             'work_area_unique_code' => $work_area_unique_code
                         ] : null;
@@ -1815,7 +1835,7 @@ class EntireInstanceService
                      * @return array|null
                      * @throws ExcelInException
                      */
-                    $check_ywjcq_r = function () use ($current_row, &$ywjcq_serial_number_r, &$ywjcq_factory_name_r, &$ywjcq_factory_device_code_r, &$ywjcq_model_name_r, &$ywjcq_made_at_r, &$ywjcq_life_year_r, &$excel_error, $pm, $request, $work_area_unique_code) {
+                    $check_ywjcq_r = function () use ($current_row, &$ywjcq_serial_number_r, &$ywjcq_factory_name_r, &$ywjcq_factory_device_code_r, &$ywjcq_model_name_r, &$ywjcq_made_at_r, &$ywjcq_life_year_r, &$excel_error, $request, $work_area_unique_code, $status) {
                         // 验证厂家
                         if ($ywjcq_factory_name_r) {
                             $ywjcq_factory = Factory::with([])->where('name', $ywjcq_factory_name_r)->first();
@@ -1835,7 +1855,19 @@ class EntireInstanceService
                         // 验证型号
                         $ywjcq_model = null;
                         if ($ywjcq_serial_number_r && $ywjcq_model_name_r) {
-                            $ywjcq_model = EntireModel::with([])->where('is_sub_model', true)->where('name', $ywjcq_model_name_r)->first();
+                            $ywjcq_model = DB::table("entire_models as sm")
+                                ->selectRaw(join(",", ["sm.name", "sm.unique_code", "sm.parent_unique_code", "em.category_unique_code",]))
+                                ->join(DB::raw("entire_models em"), "sm.parent_unique_code", "=", "em.unique_code")
+                                ->join(DB::raw("categories c"), "em.category_unique_code", "=", "c.unique_code")
+                                ->whereNull("c.deleted_at")
+                                ->whereNull("em.deleted_at")
+                                ->whereNull("sm.deleted_at")
+                                ->where("em.is_sub_model", false)
+                                ->where("sm.is_sub_model", true)
+                                ->where("c.name", "道岔专用")
+                                ->where("em.name", "移位接触器")
+                                ->where("sm.name", $ywjcq_model_name_r)
+                                ->first();
                             if (!$ywjcq_model) throw new ExcelInException("第{$current_row}行，没有找到移位接触器(右)型号：{$ywjcq_model_name_r}");
                         }
                         // 验证所编号
@@ -1870,20 +1902,18 @@ class EntireInstanceService
                         }
 
                         return ($ywjcq_serial_number_r && $ywjcq_model) ? [
-                            'part_model_unique_code' => $pm->unique_code,
-                            'part_model_name' => $pm->name,
                             'entire_instance_identity_code' => '',
-                            'status' => 'BUY_IN',
+                            'status' => $status,
                             'factory_name' => $ywjcq_factory_name_r,
                             'factory_device_code' => $ywjcq_factory_device_code_r,
                             'identity_code' => '',
-                            'entire_instance_serial_number' => '',
-                            'category_unique_code' => $pm->category_unique_code,
-                            'entire_model_unique_code' => $pm->entire_model_unique_code,
-                            'part_category_id' => $pm->part_category_id,
+                            'category_unique_code' => $ywjcq_model->category_unique_code,
+                            'category_name' => "道岔专用",
+                            'entire_model_unique_code' => $ywjcq_model->unique_code,
+                            'model_unique_code' => $ywjcq_model->unique_code,
+                            'model_name' => $ywjcq_model->name,
                             'made_at' => $ywjcq_made_at_r,
-                            'scraping_at' => $ywjcq_scraping_at,
-                            'device_model_unique_code' => $ywjcq_model->unique_code,
+                            'scarping_at' => $ywjcq_scraping_at,
                             'serial_number' => $ywjcq_serial_number_r,
                             'work_area_unique_code' => $work_area_unique_code
                         ] : null;
@@ -1899,7 +1929,7 @@ class EntireInstanceService
                      * @return array|null
                      * @throws ExcelInException
                      */
-                    $check_jsq = function () use ($current_row, &$jsq_serial_number, &$jsq_factory_name, &$jsq_factory_device_code, &$jsq_model_name, &$jsq_made_at, &$jsq_life_year, &$excel_error, $pm, $request, $work_area_unique_code) {
+                    $check_jsq = function () use ($current_row, &$jsq_serial_number, &$jsq_factory_name, &$jsq_factory_device_code, &$jsq_model_name, &$jsq_made_at, &$jsq_life_year, &$excel_error, $request, $work_area_unique_code, $status) {
                         // 验证厂家
                         if ($jsq_factory_name) {
                             $jsq_factory = Factory::with([])->where('name', $jsq_factory_name)->first();
@@ -1919,8 +1949,20 @@ class EntireInstanceService
                         // 验证型号
                         $jsq_model = null;
                         if ($jsq_serial_number && $jsq_model_name) {
-                            $jsq_model = EntireModel::with([])->where('is_sub_model', true)->where('name', $jsq_model_name)->first();
-                            if (!$jsq_model) throw new ExcelInException("第{$current_row}行，没有找到电机型号：{$jsq_model_name}");
+                            $jsq_model = DB::table("entire_models as sm")
+                                ->selectRaw(join(",", ["sm.name", "sm.unique_code", "sm.parent_unique_code", "em.category_unique_code",]))
+                                ->join(DB::raw("entire_models em"), "sm.parent_unique_code", "=", "em.unique_code")
+                                ->join(DB::raw("categories c"), "em.category_unique_code", "=", "c.unique_code")
+                                ->whereNull("c.deleted_at")
+                                ->whereNull("em.deleted_at")
+                                ->whereNull("sm.deleted_at")
+                                ->where("em.is_sub_model", false)
+                                ->where("sm.is_sub_model", true)
+                                ->where("c.name", "道岔专用")
+                                ->where("em.name", "减速器")
+                                ->where("sm.name", $jsq_model_name)
+                                ->first();
+                            if (!$jsq_model) throw new ExcelInException("第{$current_row}行，没有找到减速器型号：{$jsq_model_name}");
                         }
                         // 验证所编号
                         if ($jsq_serial_number && $jsq_model_name) {
@@ -1954,20 +1996,17 @@ class EntireInstanceService
                         }
 
                         return ($jsq_serial_number && $jsq_model) ? [
-                            'part_model_unique_code' => $pm->unique_code,
-                            'part_model_name' => $pm->name,
                             'entire_instance_identity_code' => '',
-                            'status' => 'BUY_IN',
+                            'status' => $status,
                             'factory_name' => $jsq_factory_name,
                             'factory_device_code' => $jsq_factory_device_code,
                             'identity_code' => '',
-                            'entire_instance_serial_number' => '',
-                            'category_unique_code' => $pm->category_unique_code,
-                            'entire_model_unique_code' => $pm->entire_model_unique_code,
-                            'part_category_id' => $pm->part_category_id,
+                            'category_unique_code' => $jsq_model->category_unique_code,
+                            'category_name' => '道岔专用',
+                            'entire_model_unique_code' => $jsq_model->parent_unique_code,
+                            'model_unique_code' => $jsq_model->unique_code,
                             'made_at' => $jsq_made_at,
-                            'scraping_at' => $jsq_scraping_at,
-                            'device_model_unique_code' => $jsq_model->unique_code,
+                            'scarping_at' => $jsq_scraping_at,
                             'serial_number' => $jsq_serial_number,
                             'work_area_unique_code' => $work_area_unique_code
                         ] : null;
@@ -1983,7 +2022,7 @@ class EntireInstanceService
                      * @return array|null
                      * @throws ExcelInException
                      */
-                    $check_yb = function () use ($current_row, &$yb_serial_number, &$yb_factory_name, &$yb_factory_device_code, &$yb_model_name, &$yb_made_at, &$yb_life_year, &$excel_error, $pm, $request, $work_area_unique_code) {
+                    $check_yb = function () use ($current_row, &$yb_serial_number, &$yb_factory_name, &$yb_factory_device_code, &$yb_model_name, &$yb_made_at, &$yb_life_year, &$excel_error, $request, $work_area_unique_code, $status) {
                         // 验证厂家
                         if ($yb_factory_name) {
                             $yb_factory = Factory::with([])->where('name', $yb_factory_name)->first();
@@ -2003,8 +2042,20 @@ class EntireInstanceService
                         // 验证型号
                         $yb_model = null;
                         if ($yb_serial_number && $yb_model_name) {
-                            $yb_model = EntireModel::with([])->where('is_sub_model', true)->where('name', $yb_model_name)->first();
-                            if (!$yb_model) throw new ExcelInException("第{$current_row}行，没有找到电机型号：{$yb_model_name}");
+                            $yb_model = DB::table("entire_models as sm")
+                                ->selectRaw(join(",", ["sm.name", "sm.unique_code", "sm.parent_unique_code", "em.category_unique_code",]))
+                                ->join(DB::raw("entire_models em"), "sm.parent_unique_code", "=", "em.unique_code")
+                                ->join(DB::raw("categories c"), "em.category_unique_code", "=", "c.unique_code")
+                                ->whereNull("c.deleted_at")
+                                ->whereNull("em.deleted_at")
+                                ->whereNull("sm.deleted_at")
+                                ->where("em.is_sub_model", false)
+                                ->where("sm.is_sub_model", true)
+                                ->where("c.name", "道岔专用")
+                                ->where("em.name", "油泵")
+                                ->where("sm.name", $yb_model_name)
+                                ->first();
+                            if (!$yb_model) throw new ExcelInException("第{$current_row}行，没有找到油泵型号：{$yb_model_name}");
                         }
                         // 验证所编号
                         if ($yb_serial_number && $yb_model_name) {
@@ -2038,20 +2089,18 @@ class EntireInstanceService
                         }
 
                         return ($yb_serial_number && $yb_model) ? [
-                            'part_model_unique_code' => $pm->unique_code,
-                            'part_model_name' => $pm->name,
                             'entire_instance_identity_code' => '',
-                            'status' => 'BUY_IN',
+                            'status' => $status,
                             'factory_name' => $yb_factory_name,
                             'factory_device_code' => $yb_factory_device_code,
                             'identity_code' => '',
-                            'entire_instance_serial_number' => '',
-                            'category_unique_code' => $pm->category_unique_code,
-                            'entire_model_unique_code' => $pm->entire_model_unique_code,
-                            'part_category_id' => $pm->part_category_id,
+                            'category_unique_code' => $yb_model->category_unique_code,
+                            'category_name' => "道岔专用",
+                            'entire_model_unique_code' => $yb_model->parent_unique_code,
+                            'model_unique_code' => $yb_model->unique_code,
+                            'model_name'=>$yb_model->name,
                             'made_at' => $yb_made_at,
-                            'scraping_at' => $yb_scraping_at,
-                            'device_model_unique_code' => $yb_model->unique_code,
+                            'scarping_at' => $yb_scraping_at,
                             'serial_number' => $yb_serial_number,
                             'work_area_unique_code' => $work_area_unique_code
                         ] : null;
@@ -2067,7 +2116,7 @@ class EntireInstanceService
                      * @return array|null
                      * @throws ExcelInException
                      */
-                    $check_zdkbq = function () use ($current_row, &$zdkbq_serial_number, &$zdkbq_factory_name, &$zdkbq_factory_device_code, &$zdkbq_model_name, &$zdkbq_made_at, &$zdkbq_life_year, &$excel_error, $pm, $request, $work_area_unique_code) {
+                    $check_zdkbq = function () use ($current_row, &$zdkbq_serial_number, &$zdkbq_factory_name, &$zdkbq_factory_device_code, &$zdkbq_model_name, &$zdkbq_made_at, &$zdkbq_life_year, &$excel_error, $request, $work_area_unique_code, $status) {
                         // 验证厂家
                         if ($zdkbq_factory_name) {
                             $zdkbq_factory = Factory::with([])->where('name', $zdkbq_factory_name)->first();
@@ -2087,8 +2136,20 @@ class EntireInstanceService
                         // 验证型号
                         $zdkbq_model = null;
                         if ($zdkbq_serial_number && $zdkbq_model_name) {
-                            $zdkbq_model = EntireModel::with([])->where('is_sub_model', true)->where('name', $zdkbq_model_name)->first();
-                            if (!$zdkbq_model) throw new ExcelInException("第{$current_row}行，没有找到电机型号：{$zdkbq_model_name}");
+                            $zdkbq_model = DB::table("entire_models as sm")
+                                ->selectRaw(join(",", ["sm.name", "sm.unique_code", "sm.parent_unique_code", "em.category_unique_code",]))
+                                ->join(DB::raw("entire_models em"), "sm.parent_unique_code", "=", "em.unique_code")
+                                ->join(DB::raw("categories c"), "em.category_unique_code", "=", "c.unique_code")
+                                ->whereNull("c.deleted_at")
+                                ->whereNull("em.deleted_at")
+                                ->whereNull("sm.deleted_at")
+                                ->where("em.is_sub_model", false)
+                                ->where("sm.is_sub_model", true)
+                                ->where("c.name", "道岔专用")
+                                ->where("em.name", "自动开闭器")
+                                ->where("sm.name", $zdkbq_model_name)
+                                ->first();
+                            if (!$zdkbq_model) throw new ExcelInException("第{$current_row}行，没有找到自动开闭器型号：{$zdkbq_model_name}");
                         }
                         // 验证所编号
                         if ($zdkbq_serial_number && $zdkbq_model_name) {
@@ -2122,20 +2183,18 @@ class EntireInstanceService
                         }
 
                         return ($zdkbq_serial_number && $zdkbq_model) ? [
-                            'part_model_unique_code' => $pm->unique_code,
-                            'part_model_name' => $pm->name,
                             'entire_instance_identity_code' => '',
-                            'status' => 'BUY_IN',
+                            'status' => $status,
                             'factory_name' => $zdkbq_factory_name,
                             'factory_device_code' => $zdkbq_factory_device_code,
                             'identity_code' => '',
-                            'entire_instance_serial_number' => '',
-                            'category_unique_code' => $pm->category_unique_code,
-                            'entire_model_unique_code' => $pm->entire_model_unique_code,
-                            'part_category_id' => $pm->part_category_id,
+                            'category_unique_code' => $zdkbq_model->category_unique_code,
+                            'category_name' => "道岔专用",
+                            'entire_model_unique_code' => $zdkbq_model->unique_code,
+                            'model_unique_code' => $zdkbq_model->unique_code,
+                            'model_name'=>$zdkbq_model->name,
                             'made_at' => $zdkbq_made_at,
-                            'scraping_at' => $zdkbq_scraping_at,
-                            'device_model_unique_code' => $zdkbq_model->unique_code,
+                            'scarping_at' => $zdkbq_scraping_at,
                             'serial_number' => $zdkbq_serial_number,
                             'work_area_unique_code' => $work_area_unique_code
                         ] : null;
@@ -2151,7 +2210,7 @@ class EntireInstanceService
                      * @return array|null
                      * @throws ExcelInException
                      */
-                    $check_mcljq = function () use ($current_row, &$mcljq_serial_number, &$mcljq_factory_name, &$mcljq_factory_device_code, &$mcljq_model_name, &$mcljq_made_at, &$mcljq_life_year, &$excel_error, $pm, $request, $work_area_unique_code) {
+                    $check_mcljq = function () use ($current_row, &$mcljq_serial_number, &$mcljq_factory_name, &$mcljq_factory_device_code, &$mcljq_model_name, &$mcljq_made_at, &$mcljq_life_year, &$excel_error, $request, $work_area_unique_code, $status) {
                         // 验证厂家
                         if ($mcljq_factory_name) {
                             $mcljq_factory = Factory::with([])->where('name', $mcljq_factory_name)->first();
@@ -2171,8 +2230,20 @@ class EntireInstanceService
                         // 验证型号
                         $mcljq_model = null;
                         if ($mcljq_serial_number && $mcljq_model_name) {
-                            $mcljq_model = EntireModel::with([])->where('is_sub_model', true)->where('name', $mcljq_model_name)->first();
-                            if (!$mcljq_model) throw new ExcelInException("第{$current_row}行，没有找到电机型号：{$mcljq_model_name}");
+                            $mcljq_model = DB::table("entire_models as sm")
+                                ->selectRaw(join(",", ["sm.name", "sm.unique_code", "sm.parent_unique_code", "em.category_unique_code",]))
+                                ->join(DB::raw("entire_models em"), "sm.parent_unique_code", "=", "em.unique_code")
+                                ->join(DB::raw("categories c"), "em.category_unique_code", "=", "c.unique_code")
+                                ->whereNull("c.deleted_at")
+                                ->whereNull("em.deleted_at")
+                                ->whereNull("sm.deleted_at")
+                                ->where("em.is_sub_model", false)
+                                ->where("sm.is_sub_model", true)
+                                ->where("c.name", "道岔专用")
+                                ->where("em.name", "摩擦连接器")
+                                ->where("sm.name", $mcljq_model_name)
+                                ->first();
+                            if (!$mcljq_model) throw new ExcelInException("第{$current_row}行，没有找到摩擦连接器型号：{$mcljq_model_name}");
                         }
                         // 验证所编号
                         if ($mcljq_serial_number && $mcljq_model_name) {
@@ -2206,20 +2277,18 @@ class EntireInstanceService
                         }
 
                         return ($mcljq_serial_number && $mcljq_model) ? [
-                            'part_model_unique_code' => $pm->unique_code,
-                            'part_model_name' => $pm->name,
                             'entire_instance_identity_code' => '',
-                            'status' => 'BUY_IN',
+                            'status' => $status,
                             'factory_name' => $mcljq_factory_name,
                             'factory_device_code' => $mcljq_factory_device_code,
                             'identity_code' => '',
-                            'entire_instance_serial_number' => '',
-                            'category_unique_code' => $pm->category_unique_code,
-                            'entire_model_unique_code' => $pm->entire_model_unique_code,
-                            'part_category_id' => $pm->part_category_id,
+                            'category_unique_code' => $mcljq_model->category_unique_code,
+                            'category_name' => "道岔专用",
+                            'entire_model_unique_code' => $mcljq_model->unique_code,
+                            'model_unique_code' => $mcljq_model->unique_code,
+                            'model_name'=>$mcljq_model->name,
                             'made_at' => $mcljq_made_at,
-                            'scraping_at' => $mcljq_scraping_at,
-                            'device_model_unique_code' => $mcljq_model->unique_code,
+                            'scarping_at' => $mcljq_scraping_at,
                             'serial_number' => $mcljq_serial_number,
                             'work_area_unique_code' => $work_area_unique_code
                         ] : null;
@@ -2227,7 +2296,7 @@ class EntireInstanceService
 
                     // 写入待插入数据
                     $new_entire_instances[] = [
-                        'entire_model_unique_code' => $sm->entire_model_unique_code,
+                        'entire_model_unique_code' => $sm->parent_unique_code,
                         'serial_number' => $om_serial_number,
                         'status' => $status,
                         'maintain_station_name' => $o_station_name,
@@ -2294,12 +2363,12 @@ class EntireInstanceService
                     // 部件赋码
                     foreach ($new_entire_instance as $k => $ei) {
                         foreach ($ei['part_instances'] as $pk => $part_instance) {
-                            $pic = $entire_instance_counts->get($part_instance['device_model_unique_code'], 0);
+                            $pic = $entire_instance_counts->get($part_instance['model_unique_code'], 0);
                             if ($part_instance) {
                                 $new_entire_instances[$entire_model_unique_code][$k]['part_instances'][$pk]['entire_instance_identity_code'] = $new_entire_instance[$k]['identity_code'];
-                                $new_entire_instances[$entire_model_unique_code][$k]['part_instances'][$pk]['identity_code'] = $part_instance['device_model_unique_code'] . env('ORGANIZATION_CODE') . str_pad(++$pic, 7, '0', 0) . 'H';
-                                $new_entire_instances[$entire_model_unique_code][$k]['part_instances'][$pk]['entire_instance_serial_number'] = $new_entire_instance[$k]['serial_number'];
-                                $entire_instance_counts[$part_instance['device_model_unique_code']] = $pic;
+                                $new_entire_instances[$entire_model_unique_code][$k]['part_instances'][$pk]['identity_code'] = $part_instance['model_unique_code'] . env('ORGANIZATION_CODE') . str_pad(++$pic, 7, '0', 0) . 'H';
+                                // $new_entire_instances[$entire_model_unique_code][$k]['part_instances'][$pk]['entire_instance_serial_number'] = $new_entire_instance[$k]['serial_number'];
+                                $entire_instance_counts[$part_instance['model_unique_code']] = $pic;
                             }
                         }
                     }
@@ -2413,7 +2482,7 @@ class EntireInstanceService
 
                     // 添加部件
                     foreach ($new_entire_instance['part_instances'] as $part_instance)
-                        if ($part_instance) PartInstance::with([])->create($part_instance);
+                        if ($part_instance) EntireInstance::with([])->create($part_instance);
 
                     $current_row_for_fix_workflow++;
                 }
@@ -2528,11 +2597,11 @@ class EntireInstanceService
                         // 验证型号
                         if (!$om_sub_model_name) throw new ExcelInException("第{$current_row}行，型号不能为空");
                         $sm = EntireModel::with([])->where('is_sub_model', true)->where('parent_unique_code', $em->unique_code)->where('name', $om_sub_model_name)->first();
-                        if(!$sm) throw new ExcelInException("第{$current_row}行，型号：{$category->name} > {$em->name} > {$om_sub_model_name}不存在");
+                        if (!$sm) throw new ExcelInException("第{$current_row}行，型号：{$category->name} > {$em->name} > {$om_sub_model_name}不存在");
                         // 验证所编号是否重复
-                        if($om_serial_number){
-                        if(EntireInstance::with([])->where('serial_number',$om_serial_number)->where('model_unique_code',$sm->unique_code)->exists())
-                            throw new ExcelInException("第{$current_row}，所编号重复（{$om_serial_number}）。型号：{$category->name} > {$em->name} > {$om_sub_model_name}");
+                        if ($om_serial_number) {
+                            if (EntireInstance::with([])->where('serial_number', $om_serial_number)->where('model_unique_code', $sm->unique_code)->exists())
+                                throw new ExcelInException("第{$current_row}，所编号重复（{$om_serial_number}）。型号：{$category->name} > {$em->name} > {$om_sub_model_name}");
                         }
                         // $pm = PartModel::with([])->where('entire_model_unique_code', $em->unique_code)->where('name', $om_sub_model_name)->first();
                         // if (!$sm && !$pm) throw new ExcelInException("第{$current_row}行，型号：{$category->name} > {$em->name} > {$om_sub_model_name}不存在");

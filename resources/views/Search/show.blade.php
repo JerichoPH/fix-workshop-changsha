@@ -92,7 +92,7 @@
                             </dd>
                             <dt>状态：</dt>
                             <dd>{{ @$entireInstance->status }}</dd>
-                            <dt>现场车间：</dt>
+                            <dt>车间：</dt>
                             <dd>{{ @$entireInstance->Station->Parent->name ?: '' }}</dd>
                             <dt>车站：</dt>
                             <dd>{{ @$entireInstance->maintain_station_name ?: '' }}</dd>
@@ -195,33 +195,15 @@
                                             <div class="box box-solid">
                                                 <div class="box-body">
                                                     <div class="form-group form-horizontal">
-                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">部件种类：{{ $partInstance->PartCategory->name ?? '' }}</label>
-                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">唯一编号：{{ $partInstance->identity_code ?? '' }}</label>
+                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">唯一编号：<a href="/search/{{ $partInstance->identity_code }}">{{ $partInstance->identity_code ?? '' }}</a></label>
+                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">部件型号：{{ $partInstance->EntireModel->Parent->name ?? '' }} >> {{ $partInstance->EntireModel->name ?? '' }}</label>
                                                         <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">供应商：{{ $partInstance->factory_name ?? '' }}</label>
-                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">部件型号：{{ $partInstance->part_model_name ?? '' }}</label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
                                 @endif
-
-                                @foreach ($entireInstance->EntireModel->Category->PartCategories as $partCategory)
-                                    @if(!in_array($partCategory->id,$partCategoryIds))
-                                        <div class="col-md-6">
-                                            <div class="box box-solid">
-                                                <div class="box-body">
-                                                    <div class="form-group form-horizontal">
-                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">部件种类：{{ $partCategory->name ?? '' }}</label>
-                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">唯一编号：无</label>
-                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">供应商：无</label>
-                                                        <label class="control-label col-md-12" style="text-align: left; font-weight: normal;">部件型号：无</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
                             </div>
                         </div>
                     @endif

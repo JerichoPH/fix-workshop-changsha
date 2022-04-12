@@ -7,6 +7,7 @@ use App\Model\EntireInstance;
 use App\Model\FixWorkflowProcess;
 use App\Model\PivotInDeviceAndOutDevice;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Jericho\TextHelper;
@@ -29,8 +30,9 @@ class SearchController extends Controller
                 'EntireModel.Measurements.PartModel',
                 'WarehouseReportByOut',
                 'PartInstances',
-                'PartInstances.PartModel',
-                'PartInstances.PartModel.PartCategory',
+                'PartInstances.PartCategory',
+                // 'PartInstances.PartModel',
+                // 'PartInstances.PartModel.PartCategory',
                 'FixWorkflows' => function ($fixWorkflow) {
                     $fixWorkflow->orderByDesc('id');
                 },
@@ -61,9 +63,9 @@ class SearchController extends Controller
                 ->firstOrFail();
 
             # 已经存在的部件，循环空部件时不显示
-            $partCategoryIds = [];
-            foreach ($entireInstance->PartInstances as $partInstance)
-                $partCategoryIds[] = $partInstance->PartModel->part_category_id;
+            // $partCategoryIds = [];
+            // foreach ($entireInstance->PartInstances as $partInstance)
+            //     $partCategoryIds[] = $partInstance->PartModel->part_category_id;
 
             // # 获取最后一次检修人
             // $fixer = FixWorkflowProcess::with(['Processor'])->where('fix_workflow_serial_number', $entireInstance->fix_workflow_serial_number)->orderByDesc('id')->where('stage', 'FIX_AFTER')->first();
@@ -302,7 +304,7 @@ class SearchController extends Controller
                 'check_json_data' => @$check_json_data,
                 'lastFixWorkflow' => @$lastFixWorkflow,
                 'breakdownTypes' => @$breakdownTypes,
-                'partCategoryIds' => @$partCategoryIds,
+                // 'partCategoryIds' => @$partCategoryIds,
                 'maintain_station_num' => @$maintain_station_num,
                 'maintain_workshop_num' => @$maintain_workshop_num,
                 'scene_workshop_unique_code' => @$scene_workshop_unique_code,
@@ -317,7 +319,7 @@ class SearchController extends Controller
             ]);
         } catch (ModelNotFoundException $e) {
             return back()->withInput()->with('danger', '数据不存在');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $exceptionMessage = $e->getMessage();
             $exceptionLine = $e->getLine();
             $exceptionFile = $e->getFile();
