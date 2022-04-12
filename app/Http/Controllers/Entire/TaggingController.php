@@ -259,6 +259,8 @@ class TaggingController extends Controller
         try {
             $entire_instance_excel_tagging_report = EntireInstanceExcelTaggingReport::with([])->where('id', $id)->firstOrFail();
             $identity_codes = EntireInstanceExcelTaggingIdentityCode::with([])->where('entire_instance_excel_tagging_report_sn', $entire_instance_excel_tagging_report->serial_number)->pluck('entire_instance_identity_code')->toArray();  // 获取赋码设备/器材唯一编号组
+            $part_identity_codes = DB::table("entire_instances")->whereIn("entire_instance_identity_code", $identity_codes)->pluck("identity_code")->toArray();
+            $identity_codes = array_merge($identity_codes, $part_identity_codes);
 
             $entire_instance_excel_tagging_report->forceDelete();  // 删除设备/器材赋码记录单
             EntireInstanceExcelTaggingIdentityCode::with([])->where('entire_instance_excel_tagging_report_sn', $entire_instance_excel_tagging_report->serial_number)->forceDelete();  // 删除设备/器材赋码唯一编号记录

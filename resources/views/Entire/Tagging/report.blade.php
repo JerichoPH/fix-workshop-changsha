@@ -161,7 +161,7 @@
          * @param {int} id 编号
          */
         function fnRollback(id) {
-            if (confirm('回退操作不可恢复，是否确定？'))
+            if (confirm('回退操作不可恢复，是否确定？')) {
                 $.ajax({
                     url: `{{ url('entire/tagging/rollback') }}/${id}`,
                     type: 'post',
@@ -169,7 +169,8 @@
                     async: false,
                     success: function (res) {
                         console.log(`{{ url('entire/tagging/rollback') }}/${id} success:`, res);
-                        alert(res.msg);
+
+                        alert(res["msg"]);
                         location.reload();
                     },
                     error: function (err) {
@@ -178,6 +179,7 @@
                         alert(err.responseJSON.msg);
                     }
                 });
+            }
         }
     </script>
 @endsection
