@@ -2098,7 +2098,7 @@ class EntireInstanceService
                             'category_name' => "道岔专用",
                             'entire_model_unique_code' => $yb_model->parent_unique_code,
                             'model_unique_code' => $yb_model->unique_code,
-                            'model_name'=>$yb_model->name,
+                            'model_name' => $yb_model->name,
                             'made_at' => $yb_made_at,
                             'scarping_at' => $yb_scraping_at,
                             'serial_number' => $yb_serial_number,
@@ -2192,7 +2192,7 @@ class EntireInstanceService
                             'category_name' => "道岔专用",
                             'entire_model_unique_code' => $zdkbq_model->unique_code,
                             'model_unique_code' => $zdkbq_model->unique_code,
-                            'model_name'=>$zdkbq_model->name,
+                            'model_name' => $zdkbq_model->name,
                             'made_at' => $zdkbq_made_at,
                             'scarping_at' => $zdkbq_scraping_at,
                             'serial_number' => $zdkbq_serial_number,
@@ -2286,7 +2286,7 @@ class EntireInstanceService
                             'category_name' => "道岔专用",
                             'entire_model_unique_code' => $mcljq_model->unique_code,
                             'model_unique_code' => $mcljq_model->unique_code,
-                            'model_name'=>$mcljq_model->name,
+                            'model_name' => $mcljq_model->name,
                             'made_at' => $mcljq_made_at,
                             'scarping_at' => $mcljq_scraping_at,
                             'serial_number' => $mcljq_serial_number,
@@ -2431,9 +2431,22 @@ class EntireInstanceService
                         'entire_instance_identity_code' => $new_entire_instance['identity_code'],
                     ]);
 
-                    // 生成日志
+                    // 整件赋码日志
                     EntireInstanceLogFacade::makeOne('赋码', $new_entire_instance['identity_code'], 0, '', $o_made_at ? ($scraping_at ? "出厂日期：{$o_made_at}；到期日期：{$scraping_at}；" : "出厂日期：{$o_made_at}；") : '');  // 赋码
-                    // EntireInstanceLogFacade::makeOne('入所', $new_entire_instance['identity_code'], 1, "/warehouse/report/{$nwrei->warehouse_report_serial_number}?show_type=D&page=1&current_work_area=&direction=IN&updated_at=", "经办人：" . session('account.nickname') . '；');
+                    // 部件赋码日志
+                    foreach ($new_entire_instance['part_instances'] as $part_instance)
+                        if ($part_instance) {
+                            EntireInstanceLogFacade::makeOne(
+                                '赋码',
+                                $part_instance['identity_code'],
+                                0,
+                                '',
+                                join("；", [
+                                    $part_instance["made_at"] ? "出厂日期：" . Carbon::parse($part_instance['made_at'])->format("Y-m-d") : "",
+                                    ($part_instance["made_at"] && $part_instance["scarping_at"]) ? "到期日期：" . Carbon::parse($part_instance["scarping_at"])->format("Y-m-d") : "",
+                                ])
+                            );
+                        }
 
                     $inserted_count++;
 
