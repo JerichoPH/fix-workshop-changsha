@@ -637,7 +637,7 @@ class EntireInstanceService
                         $current_sheet->setCellValueExplicit('AL1', '移位接触器(右)');
                         $current_sheet->getStyle('AL1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));
                         $current_sheet->mergeCells('AL1:AQ1');
-                        // 减速器 AS~AXtyle('AL1:AQ1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                        $current_sheet->getStyle('AM1:AR1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                         // 减速器 AR~AW
                         $current_sheet->setCellValueExplicit('AR1', '减速器');
                         $current_sheet->getStyle('AR1')->getFont()->setColor(ExcelWriteHelper::getFontColor('black'));

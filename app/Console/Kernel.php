@@ -10,6 +10,7 @@ use App\Console\Commands\FixWorkflowCycleCommand;
 use App\Console\Commands\FixWorkflowInputCommand;
 use App\Console\Commands\FixWorkflowOnlyOnceCommand;
 use App\Console\Commands\GatherMsSqlCommand;
+use App\Console\Commands\KindInputQCommand;
 use App\Console\Commands\MaintainBatchInputCommand;
 use App\Console\Commands\OutputExcelCommand;
 use App\Console\Commands\QualityCommand;
@@ -37,6 +38,7 @@ class Kernel extends ConsoleKernel
         OutputExcelCommand::class,  # 导出Excel（临时）
         SqlBackupCommand::class,  # MySQL备份
         CycleFixCommand::class,  # 周期修
+        KindInputQCommand::class,  # 新建器材种类型
     ];
 
     /**
