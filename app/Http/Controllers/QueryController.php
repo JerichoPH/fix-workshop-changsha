@@ -328,6 +328,8 @@ class QueryController extends Controller
                     ->where('em.is_sub_model', false)
             );
 
+            // dd(ModelBuilderFacade::unionAll($sql_Q, $sql_S)->toSql());
+
             $query_db = ModelBuilderFacade::unionAll($sql_Q, $sql_S);
             if (request('d') == 1) {
                 // 搜索下载

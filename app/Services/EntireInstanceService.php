@@ -2296,7 +2296,7 @@ class EntireInstanceService
 
                     // 写入待插入数据
                     $new_entire_instances[] = [
-                        'entire_model_unique_code' => $sm->parent_unique_code,
+                        'entire_model_unique_code' => $sm->unique_code,
                         'serial_number' => $om_serial_number,
                         'status' => $status,
                         'maintain_station_name' => $o_station_name,
