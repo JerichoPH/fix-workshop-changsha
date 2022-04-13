@@ -68,6 +68,36 @@ class KindInputQCommand extends Command
     }
 
     /**
+     * 增加型号
+     */
+    private function changsha(): void
+    {
+        $models = [
+            "动态继电器" => [
+                "JSDXC-1700",
+                "JSDXC2-1700",
+            ],
+        ];
+
+        $this->pushModels("Q01", $models);
+    }
+
+    /**
+     * 转换锁闭器修改为器材
+     */
+    private function zhsbq(): void
+    {
+        DB::table("categories")->where("unique_code", "S07")->update(["name" => "转换锁闭器（旧码）"]);
+        DB::table("categories")->insert(["created_at" => now(), "updated_at" => now(), "unique_code" => "Q45", "name" => "转换锁闭器", "race_unique_code" => 2,]);
+        $models = [
+            "SH5系列" => [],
+            "SH6系列" => ["SH6", "SH6-A", "SH6-B", "SH6-E1",],
+        ];
+
+        $this->pushModels("Q45", $models);
+    }
+
+    /**
      * 转辙机改为器材
      */
     private function zzj(): void
@@ -97,7 +127,7 @@ class KindInputQCommand extends Command
                 "ZD6-F",
                 "DZ1-A",
             ],
-            "ZD-9" => [
+            "ZD9" => [
                 "ZD9",
                 "ZD9-A",
                 "ZD9-B",

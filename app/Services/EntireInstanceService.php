@@ -1419,6 +1419,7 @@ class EntireInstanceService
                     // 验证型号
                     if (!$om_sub_model_name) throw new ExcelInException("第{$current_row}行，型号不能为空");
                     $sm = EntireModel::with([])->where('is_sub_model', true)->where('parent_unique_code', $em->unique_code)->where('name', $om_sub_model_name)->first();
+                    if(!$sm) throw new ExcelInException("第{$current_row}行，型号：{$category->name} > {$em->name} > {$om_sub_model_name}不存在");
                     // $pm = PartModel::with([])->where('entire_model_unique_code', $em->unique_code)->where('name', $om_sub_model_name)->first();
                     // if (!$sm && !$pm) throw new ExcelInException("第{$current_row}行，型号：{$category->name} > {$em->name} > {$om_sub_model_name}不存在");
                     // if (!$sm && $pm) $sm = $pm;
