@@ -7,7 +7,7 @@
         </div>
         <ul class="nav navbar-nav" style="position: relative;">
             <li class="dropdown tasks-menu">
-                <a href="{{url('/')}}" role="button" style="font-size: 18px;">检修车间设备器材全生命周期管理系统 </a>
+                <a href="{{url('/')}}" role="button" style="font-size: 18px;">检修车间器材全生命周期管理系统 </a>
             </li>
         </ul>
 

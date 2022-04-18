@@ -16,7 +16,7 @@
 @section('content')
     <div class="login-box" style="width: 420px;">
         <div class="login-logo" style="font-size: 20px; color: #fff;">
-            检修车间设备器材全生命周期管理系统
+            检修车间器材全生命周期管理系统
         </div>
 
         <div class="login-box-body">

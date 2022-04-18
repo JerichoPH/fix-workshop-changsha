@@ -5,7 +5,7 @@
 @section('content')
     <div class="register-box">
         <div class="register-logo" style="font-size: 20px;">
-            <a href="{{url('/')}}">检修车间设备器材全生命周期管理系统</a>
+            <a href="{{url('/')}}">检修车间器材全生命周期管理系统</a>
         </div>
 
         <div class="register-box-body">

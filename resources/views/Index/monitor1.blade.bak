@@ -35,7 +35,7 @@
        <div class="main-header">
            <nav class="navbar navbar-static-top">
                <div class="navbar-header">
-                   <span class="navbar-brand">检修车间设备器材全生命周期管理系统</span>
+                   <span class="navbar-brand">检修车间器材全生命周期管理系统</span>
                </div>
                <div class="navbar-custom-menu">
                    <ul class="nav navbar-nav">

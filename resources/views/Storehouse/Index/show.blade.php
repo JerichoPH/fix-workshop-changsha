@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2 class="page-header">
-                    <i class="fa fa-globe"></i> 检修车间设备器材全生命周期管理系统
+                    <i class="fa fa-globe"></i> 检修车间器材全生命周期管理系统
                     <small class="pull-right">
                         日期：{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$warehouses->created_at)->format('Y-m-d')}}
                     </small>

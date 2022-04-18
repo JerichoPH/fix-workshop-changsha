@@ -4,7 +4,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><img src="/images/logo_sm.png" alt="" width="100%"></span>
         <!-- logo for regular state and mobile devices -->
-        {{--<span class="logo-lg"><b style="font-size: 11px;">检修车间设备器材全生命周期管理系统</b><span style="font-size: 11px;">管理平台</span></span>--}}
+        {{--<span class="logo-lg"><b style="font-size: 11px;">检修车间器材全生命周期管理系统</b><span style="font-size: 11px;">管理平台</span></span>--}}
         <span class="logo-lg"><img src="/images/logo{{ env('RAILWAY_CODE') ? '-'.env('RAILWAY_CODE') : '' }}.png" alt="" width="100%"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
@@ -16,7 +16,7 @@
         <ul class="nav navbar-nav">
             <li class="dropdown tasks-menu">
                 <a href="javascript:" data-toggle="push-menu" role="button" style="font-size: 18px;">
-                    检修车间设备器材全生命周期管理系统&nbsp;&nbsp;<small>{{ env('ORGANIZATION_NAME') }}</small>
+                    检修车间器材全生命周期管理系统&nbsp;&nbsp;<small>{{ env('ORGANIZATION_NAME') }}</small>
                     {{--!env('IP_CONTROLLER') ? session('currentClientIp') : ''--}}
                 </a>
             </li>
